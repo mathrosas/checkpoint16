@@ -8,11 +8,11 @@ using std::placeholders::_1;
 class KinematicModel : public rclcpp::Node {
 public:
   KinematicModel() : Node("kinematic_model") {
-    RCLCPP_INFO(get_logger(), "Initialized kinematic model publisher node.");
+    RCLCPP_INFO(get_logger(), "Initialized kinematic model node.");
     pub_ = this->create_publisher<geometry_msgs::msg::Twist>("/cmd_vel", 10);
     sub_ = this->create_subscription<std_msgs::msg::Float32MultiArray>(
         "/wheel_speed", 10, std::bind(&KinematicModel::callback, this, _1));
-    // Robot geometry parameters (half distances)
+    // Robot geometry parameters
     w_ = 0.26969 / 2.0;
     l_ = 0.17000 / 2.0;
     r_ = 0.10000 / 2.0;
